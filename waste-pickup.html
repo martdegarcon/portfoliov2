@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вывоз мусора для частного дома · Марат Мурзагалиев</title>
+<meta name="description" content="Учебный кейс: мобильное приложение для вывоза мусора из частного дома.">
+<meta property="og:image" content="assets/waste/states.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Lebowski";src:url(assets/fonts/lebowski.ttf) format("truetype");font-weight:100 900;font-display:swap}
+:root{--bg:#FFFFFF;--surface:#F7F7F6;--surface-2:#F1F1F0;--ink:#17181A;--ink-2:#3C3B37;--ink-3:#5C5B56;--ink-4:#6F6E68;--ink-5:#85847E;--rule:#17181A29;--rule-soft:#17181A14;--acc:#FF601A;
+  --body:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;--accent:"Lebowski","Inter Tight",sans-serif;
+  --fs-xs:16px;--fs-s:18px;--fs-m:24px;--fs-l:36px;--fs-xl:52px;--r-tile:28px}
+@media (max-width:600px){:root{--fs-l:30px;--fs-xl:38px;--fs-m:22px}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:400 var(--fs-s)/1.55 var(--body);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+a{color:inherit}
+img,video{display:block;width:100%;height:auto}
+.wide,.col{max-width:750px;margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
+.col.end,.col.facts{box-sizing:content-box;max-width:710px}
+nav{display:flex;justify-content:space-between;align-items:center;height:72px;font-size:var(--fs-xs);color:var(--ink-5)}
+nav a{text-decoration:none}
+nav a:hover{color:var(--ink)}
+header{padding:88px 20px 56px;display:flex;flex-direction:column;align-items:center;text-align:center}
+h1{font-family:var(--accent);font-weight:500;font-size:var(--fs-xl);line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+.summary{margin-top:24px;max-width:560px;color:var(--ink-4);text-wrap:balance}
+.summary span{color:var(--ink-4)}
+.meta{margin-top:28px;font-size:var(--fs-xs);color:var(--ink-5)}
+.meta b{color:var(--ink-2)!important}
+header p[style]{margin-top:28px!important}
+.prod{display:inline-flex;align-items:center;height:48px;padding:0 24px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-size:var(--fs-xs);font-weight:500;transition:transform .25s cubic-bezier(.25,1,.5,1)}
+.prod:active{transform:scale(.97)}
+figure{margin:40px auto}
+.shot{border-radius:var(--r-tile);overflow:hidden;background:var(--surface)}
+.shot.ui{background:#0b0b0d}
+figcaption{margin-top:14px;font-size:var(--fs-xs);color:var(--ink-5);text-align:center;text-wrap:balance}
+.clips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.clips .big{grid-column:1/-1}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.pair,.clips{grid-template-columns:1fr}}
+.stack{display:grid;gap:12px}
+.tag{display:block;margin:12px 0 20px;font-size:var(--fs-xs);color:var(--ink-5);text-align:center}
+article h2{margin:120px 0 24px;font-family:var(--accent);font-weight:500;font-size:var(--fs-l);line-height:1.1;letter-spacing:-.01em;text-transform:lowercase;text-align:center}
+article h3{margin:56px 0 14px;font-family:var(--accent);font-weight:500;font-size:var(--fs-m);line-height:1.2;text-transform:lowercase}
+article p{margin:0 0 16px;color:var(--ink-2)}
+.list{margin:8px 0 24px;padding:0;list-style:none}
+.list li{position:relative;padding:14px 0 14px 28px;border-top:1px solid var(--rule-soft);color:var(--ink-2)}
+.list li:last-child{border-bottom:1px solid var(--rule-soft)}
+.list li::before{position:absolute;left:0;top:14px;color:var(--ink-5);content:'—'}
+.end{padding:140px 20px 140px;text-align:center}
+.end h2{font-family:var(--accent);font-weight:500;font-size:var(--fs-l);line-height:1.1;text-transform:lowercase}
+.end p{color:var(--ink-4);max-width:520px;margin-left:auto!important;margin-right:auto!important;text-wrap:balance}
+.end .link{color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--rule)}
+footer{padding:24px 20px 40px;font-size:var(--fs-xs);color:var(--ink-5);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--rule-soft);max-width:750px;margin:0 auto}
+footer a{text-decoration:none}
+figure.wide{max-width:1120px}
+@media (min-width:701px){figure.wide,.sum{max-width:min(1120px,calc(100vw - 296px))}.col:not(.end){max-width:min(750px,calc(100vw - 296px))}}
+.shot img,.shot video{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:4vh 3vw;background:rgba(23,24,26,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);cursor:zoom-out}
+.lb.on{display:flex;animation:lbIn .3s cubic-bezier(.25,1,.5,1)}
+.lb img,.lb video{width:auto;height:auto;max-width:100%;max-height:100%;border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.4)}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+html{scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+.rl{position:fixed;z-index:20;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:5px;padding:10px 6px}
+.rl i{position:relative;display:block;height:2px;width:6px;border-radius:2px;background:var(--ink);opacity:.16;cursor:pointer;transition:width .35s cubic-bezier(.25,1,.5,1),opacity .35s,background-color .35s}
+.rl i.s{width:12px;opacity:.3}
+.rl i.on{background:var(--acc);opacity:1}
+.rl i::after{content:attr(data-t);position:absolute;right:38px;top:50%;transform:translate(6px,-50%);width:88px;text-align:right;white-space:normal;font-family:var(--accent);font-size:14px;line-height:1.05;color:var(--ink);text-transform:lowercase;text-wrap:balance;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.25,1,.5,1)}
+.rl i[data-t]:hover::after{opacity:1;transform:translate(0,-50%)}
+.rl:hover i[data-t].cur:not(:hover)::after{opacity:0}
+.rl.live i[data-t].cur::after{opacity:1;transform:translate(0,-50%)}
+@media (max-width:899px){.rl i::after{display:none}}
+.rl:hover i[data-t]:hover::after{opacity:1}
+.rl-pct{position:fixed;z-index:20;right:14px;bottom:18px;font-family:var(--accent);font-size:14px;color:var(--ink-5);font-variant-numeric:tabular-nums;opacity:0;transition:opacity .3s}
+.rl-pct.on{opacity:1}
+@media (max-width:700px){.rl,.rl-pct{display:none}html{scrollbar-width:auto}html::-webkit-scrollbar{display:block}}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 auto 8px;max-width:1120px;padding:0 20px}
+.sum div{background:var(--surface);border-radius:var(--r-tile);padding:26px 26px 28px}
+.sum b{display:block;margin-bottom:10px;font-family:var(--accent);font-weight:500;font-size:var(--fs-m);line-height:1.1;text-transform:lowercase;color:var(--ink)}
+.sum p{margin:0;font-size:16px;line-height:1.5;color:var(--ink-3)}
+@media (max-width:760px){.sum{grid-template-columns:1fr}}
+.gc{position:fixed;left:0;top:0;z-index:60;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;display:grid;place-items:center;pointer-events:none;
+  background:rgba(255,255,255,.45);-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8);box-shadow:0 8px 32px rgba(23,24,26,.14),0 1px 3px rgba(23,24,26,.06);
+  opacity:0;scale:.4;transition:opacity .25s cubic-bezier(.25,1,.5,1),scale .35s cubic-bezier(.25,1,.5,1)}
+.gc.on{opacity:1;scale:1}
+.gc svg{width:20px;height:20px;color:var(--acc)}
+@media (pointer:fine){.gc-t .shot img,.gc-t .shot video{cursor:none}}
+@media not (pointer:fine){.gc{display:none}}
+html.embed nav,html.embed footer{display:none}
+html.embed header{padding-top:96px}
+article .col p,article .list li{color:var(--ink-4)}
+article .col p b,article .list li b{color:var(--ink);font-weight:500}
+.pair.eq{align-items:stretch}
+.pair.eq .shot{aspect-ratio:var(--ar,16/10)}
+.pair.eq .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.pair.eq .shot.fit img{object-fit:contain}
+figure.wide + figure.wide{margin-top:14px}
+.jtbd{margin:22px 0 4px;padding:20px 22px;border-radius:20px;background:var(--surface);color:var(--ink-3);line-height:1.5}
+.jtbd span{display:block;margin-bottom:6px;font-size:13px;color:var(--ink-5);text-transform:uppercase;letter-spacing:.04em}
+.jtbd b{color:var(--ink);font-weight:500}
+.cjm{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.cjm>div{position:relative;display:flex;flex-direction:column;gap:8px;padding:18px 16px;border-radius:20px;background:var(--surface)}
+.cjm i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px;font-weight:500;color:var(--ink)}
+.cjm b{font-weight:500;color:var(--ink);line-height:1.25}
+.cjm p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-4)}
+.cjm em{margin-top:auto;font-style:normal;font-size:13px;line-height:1.3;padding:6px 10px;border-radius:10px;align-self:flex-start}
+.cjm .pain{background:#FF601A14;color:#C2410C}
+.cjm .ok{background:#16a34a14;color:#15803d}
+.hyp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hyp>div{display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:20px;background:var(--surface)}
+.hyp span{font-family:var(--accent);font-size:22px;color:var(--acc,#FF601A);line-height:1}
+.hyp p{margin:0;color:var(--ink-3);line-height:1.5}
+.hyp p b{color:var(--ink);font-weight:500}
+.hyp em{margin-top:auto;font-style:normal;font-size:14px;color:var(--ink);padding-top:12px;border-top:1px solid var(--rule-soft,#17181A14)}
+.hyp em::before{content:"Метрика: ";color:var(--ink-5)}
+.mtr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mtr>div{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:20px;background:var(--surface)}
+.mtr .main{grid-column:1/-1;background:var(--ink);color:#fff}
+.mtr span{font-size:13px;color:var(--ink-5);text-transform:uppercase;letter-spacing:.04em}
+.mtr .main span{color:#ffffff99}
+.mtr b{font-weight:500;line-height:1.3}
+.mtr .main b{font-family:var(--accent);font-size:28px;line-height:1.1;text-transform:lowercase}
+.mtr p{margin:0;color:#ffffffb3;max-width:560px}
+.list .h{color:var(--acc,#FF601A);white-space:nowrap;font-size:14px}
+@media (max-width:900px){.cjm{grid-template-columns:repeat(2,minmax(0,1fr))}.cjm>div:last-child{grid-column:1/-1}.mtr{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.hyp{grid-template-columns:1fr}.cjm{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stats>div{display:flex;flex-direction:column;gap:8px;padding:22px 20px;border-radius:20px;background:var(--surface)}
+.stats b{font-family:var(--accent);font-weight:500;font-size:44px;line-height:1;color:var(--ink)}
+.stats p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-3)}
+.stats a{margin-top:auto;font-size:13px;color:var(--ink-5);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.note{padding:14px 18px;border-radius:14px;background:#FF601A0F;color:#9A3412!important;font-size:15px}
+.cmp{border-radius:20px;background:var(--surface);padding:8px 22px;font-size:15px}
+.cmp>div{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--rule-soft)}
+.cmp>div:first-child{border-top:0}
+.cmp-h span{font-weight:500;color:var(--ink)}
+.cmp>div>span:first-child{color:var(--ink-5)}
+.cmp .no{color:#C2410C}.cmp .mid{color:var(--ink-3)}.cmp .ok{color:#15803d}
+.ins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ins>div{display:flex;flex-direction:column;gap:8px;padding:22px;border-radius:20px;background:var(--surface)}
+.ins span{font-family:var(--accent);font-size:22px;color:var(--acc);line-height:1}
+.ins b{font-weight:500;font-size:19px;line-height:1.25;color:var(--ink)}
+.ins p{margin:0;color:var(--ink-3)}
+.ins em{margin-top:auto;padding-top:12px;border-top:1px solid var(--rule-soft);font-style:normal;font-size:14px;line-height:1.45;color:var(--ink-4)}
+.ins em a{text-decoration:underline;text-underline-offset:3px}
+.src li{font-size:15px}.src a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;color:var(--ink-3)}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.ins{grid-template-columns:1fr}.cmp{overflow-x:auto}.cmp>div{min-width:560px}.stats b{font-size:36px}}
+.hyp span small{font-family:var(--body);font-size:13px;color:var(--ink-5);margin-left:8px;vertical-align:4px}
+</style>
+<script>if (window.self !== window.top) document.documentElement.classList.add('embed');</script>
+</head>
+<body>
+<nav class="wide"><a href="index.html#work">← Все проекты</a><a href="index.html">Марат Мурзагалиев</a></nav>
+
+<header class="wide">
+  <h1>Вывоз мусора для частного дома</h1>
+  <p class="summary">Концепт мобильного приложения: когда приедут, что заберут и&nbsp;что делать, если что-то пошло не&nbsp;так.</p>
+  <p class="meta"><b style="color:var(--ink);font-weight:500">Учебный кейс</b> · исследование, гипотезы, интерфейс · мобильное приложение</p>
+</header>
+
+<figure class="wide">
+  <div class="pair" style="align-items:center">
+    <div class="shot" style="aspect-ratio:940/1340;position:relative"><div style="position:absolute;top:50%;left:50%;height:88%;aspect-ratio:780/1688;transform:translate(-50%,-50%);border-radius:28px;overflow:hidden;background:#F5F4F0"><iframe src="https://player.vimeo.com/video/1234463234?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1&amp;badge=0" title="Waste Pickup — анимация экранов" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div></div>
+    <div class="shot"><img src="assets/waste/home.webp" width="940" height="2740" alt="Главный экран целиком: ближайший вывоз, график и что принимается в бак" loading="lazy" style="aspect-ratio:940/1340;height:auto;object-fit:cover;object-position:top"></div>
+  </div>
+  <figcaption>Слева живой прототип, справа главный экран целиком.</figcaption>
+</figure>
+
+<article>
+  <div class="col">
+    <h2>Проблема</h2>
+    <p>С 2019 года мусор у частных домов вывозит региональный оператор по договору. Формально всё работает, но люди недовольны. <b>Проблема не в том, что мусор совсем не вывозят, а в том, что человек ничего не знает:</b> когда приедут, что заберут и приезжали ли вообще.</p>
+  </div>
+  <figure class="wide">
+    <div class="stats">
+      <div><b>41%</b><p>россиян называют плохую организацию сбора и вывоза мусора главной экологической проблемой</p><a href="https://ru.themoscowtimes.com/2024/09/13/rossiyane-massovo-pozhalovalis-na-problemi-s-vivozom-musora-posle-reformi-putina-a142083" target="_blank" rel="noopener">Опрос Народного фронта, 2024</a></div>
+      <div><b>30%</b><p>считают, что после мусорной реформы с вывозом стало только хуже</p><a href="https://ru.themoscowtimes.com/2024/09/13/rossiyane-massovo-pozhalovalis-na-problemi-s-vivozom-musora-posle-reformi-putina-a142083" target="_blank" rel="noopener">Там же, 16 419 опрошенных</a></div>
+      <div><b>36%</b><p>жалоб в сервис «РЭО Радар» — на несвоевременный вывоз, ещё 31% — на нарушения при сборе</p><a href="https://360.ru/news/ekologiya/reo-predlozhil-vnedrit-vserossijskuju-fotofiksatsiju-vyvoza-othodov/" target="_blank" rel="noopener">РЭО, декабрь 2024</a></div>
+      <div><b>51 762</b><p>жалобы на вывоз мусора и контейнерные площадки за один месяц по стране</p><a href="https://riamo.ru/news/zhkh/reo-obschee-chislo-zhalob-na-vyvoz-othodov-snizilos-k-kontsu-goda/" target="_blank" rel="noopener">РЭО, ноябрь 2025</a></div>
+    </div>
+  </figure>
+
+  <div class="col">
+    <h2>Исследование</h2>
+    <p>Чтобы понять, где на самом деле болит, собрал данные из нескольких источников:</p>
+    <ul class="list">
+      <li><b>Кабинетное исследование.</b> Данные РЭО и Народного фронта о жалобах на вывоз мусора.</li>
+      <li><b>Истории владельцев домов.</b> Разбор публикаций и жалоб, где люди описывают свой опыт с регоператором.</li>
+      <li><b>Конкуренты.</b> Сервисы заказа вывоза ЗаБеру и МусорОФФ и их отзывы в RuStore.</li>
+      <li><b>Путь пользователя.</b> Собрал из всего этого путь организатора и отметил боли.</li>
+    </ul>
+  </div>
+  <figure class="wide">
+    <div class="cmp">
+      <div class="cmp-h"><span></span><span>ЗаБеру</span><span>МусорОФФ</span><span>Регоператор</span></div>
+      <div><span>Что делает</span><span>Курьер забирает пакеты у двери</span><span>Подписка на вынос пакетов</span><span>Регулярный вывоз по договору</span></div>
+      <div><span>Крупногабарит, стройка, листья</span><span class="no">Нет</span><span class="no">Нет</span><span class="no">Отдельно, по звонку</span></div>
+      <div><span>Видно, когда приедут</span><span class="mid">Выбор времени</span><span class="mid">Выбор даты</span><span class="no">Только график</span></div>
+      <div><span>Если что-то пошло не так</span><span class="no">Писать менеджерам</span><span class="no">—</span><span class="no">Звонок или жалоба</span></div>
+      <div><span>Охват</span><span class="mid">Москва и область</span><span class="no">Жалобы на охват</span><span class="ok">Вся страна</span></div>
+    </div>
+    <figcaption>Сервисы заказа вывоза сделаны для квартир, а не для частного дома.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h2>Инсайты</h2>
+  </div>
+  <figure class="wide">
+    <div class="ins">
+      <div><span>01</span><b>Главная боль — неизвестность</b><p>Люди злятся не на сам мусор, а на то, что не понимают, что происходит.</p><em>Откуда: 36% жалоб в «РЭО Радар» — на несвоевременный вывоз. В отзыве на ЗаБеру человек узнал, что пакеты не забрали, только вечером, и каждый раз писал менеджерам.</em></div>
+      <div><span>02</span><b>Нельзя проверить, что вывоз был</b><p>Человек платит каждый месяц, но не видит, что услуга оказана.</p><em>Откуда: владелец дома в <a href="https://t-j.ru/mnogo-za-musor/" target="_blank" rel="noopener">статье Т—Ж</a> не может доказать, что мусор у него забирают, а платит круглый год. РЭО в 2024 году предложил обязать водителей фотографировать вывоз.</em></div>
+      <div><span>03</span><b>Сервисы заказа не для частного дома</b><p>Они про пакеты у двери квартиры, а у дома мусор другой: ремонт, техника, листья.</p><em>Откуда: разбор ЗаБеру и МусорОФФ, оба считают заказ по количеству пакетов.</em></div>
+      <div><span>04</span><b>Любая проблема решается звонком</b><p>Закрытая калитка или не тот мусор в баке — и человеку надо звонить и выяснять.</p><em>Откуда: путь пользователя и отзывы. Для жалоб на вывоз есть даже отдельный государственный сервис «РЭО Радар».</em></div>
+    </div>
+  </figure>
+
+  <div class="col">
+    <h2>Пользователь</h2>
+    <p>Владелец частного дома, который в семье «отвечает за мусор». Регулярный вывоз у него уже есть, но иногда появляется что-то сверху: ремонт, старая техника, листья осенью.</p>
+    <div class="jtbd"><span>Задача пользователя</span>Когда у дома копится мусор, я хочу <b>быстро понять, заберут ли его и когда</b>, чтобы больше об этом не думать.</div>
+
+    <h2>Путь пользователя</h2>
+    <p>Путь организатора от «появился мусор» до «вопрос закрыт».</p>
+  </div>
+  <figure class="wide">
+    <div class="cjm">
+      <div><i>1</i><b>Появился мусор</b><p>Не ясно, влезет ли в обычный вывоз или нужен отдельный.</p></div>
+      <div><i>2</i><b>Ждёт вывоза</b><p>Знает день, но не знает время. Интервалы слишком широкие.</p></div>
+      <div><i>3</i><b>Что-то пошло не так</b><p>Гроза, закрытая калитка, бак не забрали. Узнаёт об этом последним.</p></div>
+      <div><i>4</i><b>Нужен доп. вывоз</b><p>Надо звонить или искать окно в календаре на месяц вперёд.</p></div>
+      <div><i>5</i><b>Вопрос закрыт</b><p>Хочется просто забыть про мусор до следующего раза.</p></div>
+    </div>
+    <figcaption>Путь организатора вывоза от начала до конца.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h2>Гипотезы</h2>
+    <p>Из инсайтов вывел гипотезы. Каждую можно проверить конкретной метрикой.</p>
+  </div>
+  <figure class="wide">
+    <div class="hyp">
+      <div><span>01</span><p>Если показать правила приёма <b>прямо на главном экране</b>, люди реже будут класть в бак то, что не заберут.</p><em>Доля вывозов «забрали не всё»</em></div>
+      <div><span>02</span><p>Если карточка <b>сама объясняет любые изменения</b>: грозу, сдвиг времени, задержку, станет меньше звонков «когда приедете».</p><em>Звонки в поддержку на 100 вывозов</em></div>
+      <div><span>03</span><p>Если из проблемы можно <b>сразу её решить</b>: позвонить водителю, перенести, заказать вывоз, больше ситуаций закроется без поддержки.</p><em>Доля проблем, решённых в приложении</em></div>
+      <div><span>04</span><p>Если доп. вывоз сразу предлагает <b>реальные окна на завтра</b>, его будут чаще заказывать в приложении, а не по телефону.</p><em>Конверсия в доп. вывоз и время заказа</em></div>
+    </div>
+  </figure>
+
+  <div class="col">
+    <h2>Как пойму, что работает</h2>
+  </div>
+  <figure class="wide">
+    <div class="mtr">
+      <div class="main"><span>Главная метрика</span><b>Доля вывозов без обращения в поддержку</b><p>Если человек ни разу не позвонил и не написал, значит, приложение ответило на все его вопросы.</p></div>
+      <div><span>Поддержка</span><b>Звонки на 100 вывозов</b></div>
+      <div><span>Деньги</span><b>Конверсия в доп. вывоз</b></div>
+      <div><span>Удобство</span><b>Доп. вывоз за 3 касания</b></div>
+      <div><span>Ошибки</span><b>Доля «забрали не всё»</b></div>
+    </div>
+  </figure>
+
+  <div class="col">
+    <h2>Ключевые решения</h2>
+    <ul class="list">
+      <li><b>Всё главное в одной карточке.</b> День, время и что заберут. Тут же правила: что можно класть в бак, а что вывозится отдельно.</li>
+      <li><b>Карточка меняется под ситуацию.</b> Гроза, сдвиг времени, забрали не всё. Сразу видно, что случилось и нужно ли что-то делать, а цвет показывает, насколько всё серьёзно.</li>
+    </ul>
+  </div>
+  <figure class="wide">
+    <div class="shot"><img src="assets/waste/states.webp" width="2240" height="1219" alt="Состояния карточки: два вывоза в один день, задержка, сдвиг времени, забрали частично" loading="lazy"></div>
+    <figcaption>Два вывоза за раз, задержка из-за грозы, сдвиг времени, забрали не всё.</figcaption>
+  </figure>
+
+  <div class="col">
+    <ul class="list">
+      <li><b>Из любой проблемы есть выход.</b> Калитка закрыта: можно позвонить водителю или перенести вывоз. Бак не забрали из-за строймусора: одна кнопка заказывает вывоз именно его.</li>
+      <li><b>Доп. вывоз в три касания.</b> Выбрал, что вывезти, и ближайшее окно. Без календаря на месяц вперёд.</li>
+    </ul>
+  </div>
+  <figure class="wide">
+    <div class="pair eq" style="--ar:1478/1520">
+      <div class="shot"><img src="assets/waste/situations.webp" width="1478" height="1520" alt="Калитка закрыта и бак не забрали" loading="lazy"></div>
+      <div class="shot fit"><img src="assets/waste/order.webp" width="1430" height="2620" alt="Заказ дополнительного вывоза" loading="lazy"></div>
+    </div>
+    <figcaption>Слева срочные ситуации, справа заказ доп. вывоза.</figcaption>
+  </figure>
+
+  <div class="col">
+    <ul class="list">
+      <li><b>Шапка меняется по сезону</b> и подсказывает сезонную услугу, например вывоз листьев осенью. Это ещё и точка продажи доп. услуг.</li>
+      <li><b>Без баллов и эко-бейджей.</b> Это приложение не про экологию, а про то, чтобы не думать о мусоре. Геймификация тут только отвлекала бы.</li>
+    </ul>
+  </div>
+  <figure class="wide">
+    <div class="shot"><img src="assets/waste/seasons.webp" width="2240" height="1219" alt="Главный экран весной, летом, осенью и зимой" loading="lazy"></div>
+    <figcaption>Весна, лето, осень, зима.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h2>Результат</h2>
+    <p>Главный экран, все состояния карточки, доп. вывоз и сезонные услуги. Каждое решение привязано к инсайту, боли из пути пользователя и метрике, по которой его можно проверить.</p>
+
+    <h2>Следующие шаги</h2>
+    <ul class="list">
+      <li><b>Юзабилити-тест на 5 владельцах домов.</b> Три задания: понять, можно ли выбросить старый диван; заказать вывоз листьев; разобраться, что делать, если калитка закрыта.</li>
+      <li><b>Пилот на одном посёлке.</b> Сравнить звонки в поддержку и заказы доп. вывоза до и после приложения.</li>
+      <li><b>Фото после вывоза.</b> Добавить в карточку фото контейнера, чтобы человек видел, что услуга оказана. РЭО как раз предлагает обязать водителей делать такие фото.</li>
+    </ul>
+
+    <h2>Источники</h2>
+    <ul class="list src">
+      <li><a href="https://ru.themoscowtimes.com/2024/09/13/rossiyane-massovo-pozhalovalis-na-problemi-s-vivozom-musora-posle-reformi-putina-a142083" target="_blank" rel="noopener">Опрос Народного фронта о мусорной реформе, 2024</a></li>
+      <li><a href="https://360.ru/news/ekologiya/reo-predlozhil-vnedrit-vserossijskuju-fotofiksatsiju-vyvoza-othodov/" target="_blank" rel="noopener">РЭО: структура жалоб и фотофиксация вывоза, декабрь 2024</a></li>
+      <li><a href="https://riamo.ru/news/zhkh/reo-obschee-chislo-zhalob-na-vyvoz-othodov-snizilos-k-kontsu-goda/" target="_blank" rel="noopener">РЭО: число жалоб на вывоз отходов, ноябрь 2025</a></li>
+      <li><a href="https://360.ru/news/ekologiya/bolee-65-000-chelovek-reshili-problemy-s-vyvozom-tko-onlajn/" target="_blank" rel="noopener">«РЭО Радар»: самые частые жалобы, 2025</a></li>
+      <li><a href="https://t-j.ru/mnogo-za-musor/" target="_blank" rel="noopener">Т—Ж: история владельца частного дома</a></li>
+      <li><a href="https://www.rustore.ru/catalog/app/ru.zaberu.app" target="_blank" rel="noopener">ЗаБеру в RuStore</a> и <a href="https://www.rustore.ru/catalog/app/com.musoroff" target="_blank" rel="noopener">МусорОФФ в RuStore</a></li>
+    </ul>
+  </div>
+</article>
+
+<section class="col end">
+  <h2>Открыт к сотрудничеству</h2>
+  <p style="margin:36px 0 0"><a class="link" href="https://t.me/martgarcon" target="_blank" rel="noopener">Написать в Telegram →</a></p>
+</section>
+
+<footer class="wide"><span>Марат Мурзагалиев · продуктовый дизайнер</span><a href="index.html#work">Все проекты →</a></footer>
+
+<div class="lb" id="lb" aria-hidden="true"></div>
+<script>
+(()=>{ const lb=document.getElementById('lb'), embed=window.self!==window.top;
+  const show=(kind,src,poster)=>{ lb.innerHTML=kind==='video'?'<video src="'+src+'"'+(poster?' poster="'+poster+'"':'')+' autoplay muted loop playsinline controls></video>':'<img src="'+src+'" alt="">'; lb.classList.add('on'); };
+  const hide=()=>{ lb.classList.remove('on'); lb.innerHTML=''; };
+  document.addEventListener('click',e=>{ const m=e.target.closest('.shot img,.shot video'); if(!m) return; e.preventDefault();
+    const kind=m.tagName==='VIDEO'?'video':'img', src=new URL(m.currentSrc||m.getAttribute('src'),location.href).href, poster=m.poster||'';
+    if(embed){ try{ parent.postMessage({type:'rk-lightbox',kind,src,poster},'*'); return; }catch(err){} }
+    show(kind,src,poster); });
+  lb.addEventListener('click',hide);
+  addEventListener('keydown',e=>{ if(e.key==='Escape') hide(); });
+})();
+
+/* ---------- Типограф: без висячих предлогов ---------- */
+(()=>{ const re=/(^|[\s\u00A0(«])(в|во|и|с|со|к|ко|о|об|у|а|я|на|по|до|из|от|за|не|но|же|для|так|как|что|это|при|про|над|под|без)\s+/gi;
+  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('script,style,svg,.track')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const ns=[]; while(w.nextNode()) ns.push(w.currentNode);
+  ns.forEach(n=>{ let t=n.nodeValue; const o=t; t=t.replace(re,(m,a,b)=>a+b+'\u00A0').replace(re,(m,a,b)=>a+b+'\u00A0').replace(/\s+—/g,'\u00A0—'); if(t!==o) n.nodeValue=t; });
+})();
+
+/* ---------- Плавный скролл (колесо и якоря), на тач — нативный ---------- */
+(()=>{
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches || !matchMedia('(pointer:fine)').matches) { document.documentElement.style.scrollBehavior='smooth'; return; }
+  let target=scrollY, cur=scrollY, run=false;
+  const max=()=>document.documentElement.scrollHeight-innerHeight;
+  const loop=()=>{ cur+=(target-cur)*.09; if(Math.abs(target-cur)<.5){ cur=target; run=false; } scrollTo(0,cur); if(run) requestAnimationFrame(loop); };
+  const go=y=>{ target=Math.max(0,Math.min(max(),y)); if(!run){ cur=scrollY; run=true; requestAnimationFrame(loop); } }; window.__go=go;
+  addEventListener('wheel',e=>{ if(document.getElementById('lb').classList.contains('on')) return; if(e.ctrlKey || Math.abs(e.deltaX)>Math.abs(e.deltaY)) return; e.preventDefault();
+    const dy=e.deltaMode===1?e.deltaY*32:e.deltaY; if(!run) target=scrollY; go(target+dy); },{passive:false});
+  addEventListener('scroll',()=>{ if(!run){ target=cur=scrollY; } },{passive:true});
+  document.addEventListener('click',e=>{ const a=e.target.closest('a[href^="#"]'); if(!a) return; const id=a.getAttribute('href').slice(1);
+    const el=id?document.getElementById(id):document.body; if(!el) return; e.preventDefault(); go(el.getBoundingClientRect().top+scrollY-24); });
+  addEventListener('keydown',e=>{ const k={ArrowDown:80,ArrowUp:-80,PageDown:innerHeight*.9,PageUp:-innerHeight*.9,' ':innerHeight*.9}[e.key];
+    if(k===undefined || /input|textarea/i.test(e.target.tagName) || document.querySelector('dialog[open]')) return; e.preventDefault(); if(!run) target=scrollY; go(target+(e.shiftKey&&e.key===' '?-k:k)); });
+})();
+/* ---------- Линейка прокрутки ---------- */
+(()=>{ const N=46, rl=document.createElement('div'); rl.className='rl'; rl.setAttribute('aria-hidden','true');
+  const pct=document.createElement('div'); pct.className='rl-pct';
+  const ticks=[...Array(N)].map(()=>{ const i=document.createElement('i'); rl.append(i); return i; });
+  document.body.append(rl,pct);
+  const max=()=>Math.max(1,document.documentElement.scrollHeight-innerHeight);
+  let secs=[];
+  const map=()=>{ ticks.forEach(t=>{ t.classList.remove('s'); t.removeAttribute('data-t'); t.dataset.y=''; });
+    secs=[...document.querySelectorAll('article h2, .end h2')].map(h=>{ const y=Math.min(max(),h.getBoundingClientRect().top+scrollY-40), k=Math.round(y/max()*(N-1));
+      const t=ticks[k]; t.classList.add('s'); t.dataset.t=h.textContent.trim(); t.dataset.y=y; return {k,y}; }); };
+  const jump=y=>window.__go?__go(y):scrollTo({top:y,behavior:'smooth'});
+  ticks.forEach((t,k)=>t.addEventListener('click',()=>jump(t.dataset.y?+t.dataset.y:k/(N-1)*max())));
+  let hide=0;
+  const draw=()=>{ const p=scrollY/max(), c=p*(N-1);
+    ticks.forEach((t,k)=>{ const d=Math.abs(k-c), w=Math.max(0,1-d/4); const base=t.classList.contains('s')?12:6;
+      t.style.width=(base+w*20)+'px'; t.style.opacity=t.classList.contains('on')?1:(t.classList.contains('s')?.3:.16)+w*.55; });
+    const ci=Math.round(c); ticks.forEach((t,k)=>t.classList.toggle('on',k===ci));
+    let cur=-1; secs.forEach((s,i)=>{ if(scrollY>=s.y-innerHeight*.4) cur=i; }); ticks.forEach(t=>t.classList.remove('cur')); if(cur>=0) ticks[secs[cur].k].classList.add('cur');
+    pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%'; pct.classList.add('on'); rl.classList.add('live'); clearTimeout(hide); hide=setTimeout(()=>{ pct.classList.remove('on'); rl.classList.remove('live'); },1200); };
+  let raf=0; addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; draw(); }); },{passive:true});
+  addEventListener('resize',()=>{ map(); draw(); }); addEventListener('load',()=>{ map(); draw(); });
+  map(); draw(); setTimeout(()=>{ map(); draw(); },1500);
+})();
+
+/* ---------- Стеклянный курсор над медиа ---------- */
+(()=>{ if(!matchMedia('(pointer:fine)').matches) return; document.documentElement.classList.add('gc-t');
+  const c=document.createElement('div'); c.className='gc'; c.setAttribute('aria-hidden','true');
+  c.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20M10.5 7.8v5.4M7.8 10.5h5.4"/></svg>';
+  document.body.append(c);
+  let x=0,y=0,cx=0,cy=0,raf=0,on=false;
+  const loop=()=>{ cx+=(x-cx)*.28; cy+=(y-cy)*.28; c.style.transform='translate('+cx+'px,'+cy+'px)'; raf=(on||Math.abs(x-cx)+Math.abs(y-cy)>.5)?requestAnimationFrame(loop):0; };
+  let seen=false;
+  const check=()=>{ if(!seen) return; const el=document.elementFromPoint(x,y), t=el&&el.closest('.shot img,.shot video');
+    if(t&&!document.getElementById('lb').classList.contains('on')){ if(!on){ on=true; if(!c.classList.contains('on')){ cx=x; cy=y; } c.classList.add('on'); } } else if(on){ on=false; c.classList.remove('on'); }
+    if(!raf) raf=requestAnimationFrame(loop); };
+  addEventListener('pointermove',e=>{ x=e.clientX; y=e.clientY; seen=true; check(); },{passive:true});
+  addEventListener('scroll',check,{passive:true});
+  document.documentElement.addEventListener('mouseleave',()=>{ seen=false; on=false; c.classList.remove('on'); });
+  addEventListener('click',()=>{ on=false; c.classList.remove('on'); },true);
+})();
+
+</script>
+</body>
+</html>
